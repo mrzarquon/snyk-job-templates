@@ -5,8 +5,7 @@ image:
 stage: build
 script:
   - cd AUTOGENPROJECT
-  - npm install
-  - npm install snyk-to-html -g
+  - npm install > /dev/null 2>&1
   - snyk auth $SNYK_TOKEN
   - snyk monitor --remote-repo-url=${CI_PROJECT_URL} --project-name=${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}/AUTOGENPROJECT
   - snyk test --severity-threshold=high --remote-repo-url=${CI_PROJECT_URL} --project-name=${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}/AUTOGENPROJECT
