@@ -1,0 +1,12 @@
+stub: snyk-python
+image: 
+  name: snyk/snyk:python-3.8
+  entrypoint: [""]
+stage: build
+script:
+  - cd AUTOGENPROJECT
+  - pip install poetry > /dev/null 2>&1
+  - poetry install
+  - snyk auth $SNYK_TOKEN
+  - snyk monitor --remote-repo-url=${CI_PROJECT_URL} --project-name=${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}/AUTOGENPROJECT
+  - snyk test --severity-threshold=high --remote-repo-url=${CI_PROJECT_URL} --project-name=${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}/AUTOGENPROJECT

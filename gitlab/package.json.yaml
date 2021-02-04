@@ -1,0 +1,12 @@
+stub: snyk-node
+image: 
+  name: snyk/snyk:node-14
+  entrypoint: [""]
+stage: build
+script:
+  - cd AUTOGENPROJECT
+  - npm install
+  - npm install snyk-to-html -g
+  - snyk auth $SNYK_TOKEN
+  - snyk monitor --remote-repo-url=${CI_PROJECT_URL} --project-name=${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}/AUTOGENPROJECT
+  - snyk test --severity-threshold=high --remote-repo-url=${CI_PROJECT_URL} --project-name=${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}/AUTOGENPROJECT
