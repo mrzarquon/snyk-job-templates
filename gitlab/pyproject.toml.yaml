@@ -8,5 +8,5 @@ script:
   - pip install poetry > /dev/null 2>&1
   - poetry install > /dev/null 2>&1
   - snyk auth $SNYK_TOKEN
-  - if [ "${CI_COMMIT_BRANCH}" = "${CI_DEFAULT_BRANCH}" ]; then snyk monitor --remote-repo-url=${CI_PROJECT_URL} --project-name=${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}/AUTOGENPROJECT; fi
   - snyk test --severity-threshold=high --remote-repo-url=${CI_PROJECT_URL} --project-name=${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}/AUTOGENPROJECT
+  - if [ "${CI_COMMIT_BRANCH}" = "${CI_DEFAULT_BRANCH}" ]; then snyk monitor --remote-repo-url=${CI_PROJECT_URL} --project-name=${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}/AUTOGENPROJECT; fi
